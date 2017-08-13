@@ -1,0 +1,69 @@
+const express = require('express');
+const app = express()
+
+const router = express.Router()
+const db = require('../models')
+
+router.get('/', (req, res)=>{
+  db.Subject.findAll({
+    include:[db.Teacher],
+    order:[["id"]]
+  })
+  .then(data =>{
+    res.render('subjects', {subjectData:data})
+  })
+})
+
+router.get('/add', (req, res)=>{
+  res.render('subjects-add-form')
+})
+
+router.post('/add', (req, res)=>{
+  db.Subject.create({
+    subject_name: `${req.body.subject_name}`,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+  .then(()=>{
+    res.redirect('/subjects')
+  })
+})
+
+router.get('/enrollment/:id', (req, res)=>{
+  db.StudentSubject.findAll({
+    where:{
+      SubjectId:req.params.id
+    },
+    include:{all:true}
+  })
+  .then(data =>{
+    res.render('subjects-enrollment', {allData:data})
+  })
+})
+
+router.get('/edit/:id', (req, res)=>{
+  db.Subject.findById(req.params.id)
+  .then(data =>{
+    res.render('subjects-edit-form', {subjectData:data})
+  })
+})
+
+router.post('/edit/:id', (req, res)=>{
+  db.Subject.update({
+    subject_name: `${req.body.subject_name}`,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },{where:{id: `${req.params.id}`}})
+  .then(()=>{
+    res.redirect('/subjects')
+  })
+})
+
+router.get('/delete/:id', (req, res)=>{
+  db.Subject.destroy({where:{id:`${req.params.id}`}})
+  .then(()=>{
+    res.redirect('/subjects')
+  })
+})
+
+module.exports= router

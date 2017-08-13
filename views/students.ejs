@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+  <%- include ./partial/title%>
+</head>
+
+<body>
+  <center>
+    <h1>Students Info Table</h1>
+    <br><br>
+    <td><a href="/home"><button type="Submit" name="">Home</button></a></td>
+    <td><a href="/students/add"><button type="Submit" name="">Add Data Student</button></a></td>
+    <br><br>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Students Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Enroll</th>
+        <th colspan="2">Options</th>
+      </tr>
+      <% var number = 0 %>
+      <% studentData.forEach(student =>{ %>
+      <tr>
+        <td><%= number+=1 %></td>
+        <td><%= student.id %></td>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <td><%= student.email %></td>
+        <td><a href="/students/enroll/<%=student.id%>"><button type="Submit" name="">Add Subject</button></a></td>
+        <td><a href="/students/edit/<%=student.id%>"><button type="Submit" name="">Edit</button></a></td>
+        <td><a href="/students/delete/<%=student.id%>" onclick="return confirm('Are you sure you want to delete this item?');"><button type="Submit" name="">Delete</button></a></td>
+      </tr>
+      <% }) %>
+    </table>
+  </center>
+</body>
+
+</html>

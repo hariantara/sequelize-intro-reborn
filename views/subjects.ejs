@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+  <title>Subject</title>
+</head>
+
+<body>
+  <center>
+    <h1>Subject Info Table</h1>
+    <br><br>
+    
+    <td><a href="/home"><button type="Submit" name="">Home</button></a></td>
+    <td><a href="/subjects/add"><button type="Submit" name="">Add Data Subject</button></a></td>
+    <br><br>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Subject Id</th>
+        <th>Subject Name</th>
+        <th>Teacher</th>
+        <th>Actions</th>
+        <th colspan="2">Options</th>
+      </tr>
+      <% var number = 0 %>
+      <% subjectData.forEach(subject =>{ %>
+      <tr>
+        <td><%= number+=1 %></td>
+        <td><%= subject.id %></td>
+        <td><%= subject.subject_name %></td>
+        <td>
+          <% if(subject.Teachers[0]== undefined ){%> No Teacher
+            <%}else{for(let i=0; i<subject.Teachers.length; i++){%>
+              <%= i+1+". "+(subject.Teachers[i].first_name+" "+subject.Teachers[i].last_name)%><br>
+              <%}}%>
+        </td>
+        <td><a href="/subjects/enrollment/<%= subject.id %>"><button type="Submit" name="">Enrollment</button></a></td>
+        <td><a href="/subjects/edit/<%= subject.id %>"><button type="Submit" name="">Edit</button></a></td>
+        <td><a href="/subjects/delete/<%= subject.id %>"><button type="Submit" name="">Delete</button></a></td>
+      </tr>
+      <% }) %>
+    </table>
+  </center>
+</body>
+
+</html>

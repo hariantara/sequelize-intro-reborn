@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+  <title>Subject</title>
+</head>
+
+<body>
+  <center>
+    <%= JSON.stringify(allData) %>
+    <h1><%= allData[0].Subject.subject_name %></h1>
+
+    <br><br>
+    <table>
+      <tr>
+        <th>Student Name</th>
+        <th>Score</th>
+      </tr>
+      <% allData.forEach(data =>{ %>
+      <tr>
+        <td>
+          <%= data.Student.first_name+" "+data.Student.last_name %>
+        </td>
+        <td>
+          <%if(data.Score == undefined){%>
+            <a href=""><button type="Submit" name="">Give Score</button></a>
+          <%}else{%>
+            <%= data.Score %>
+          <%}%>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+  </center>
+</body>
+
+</html>

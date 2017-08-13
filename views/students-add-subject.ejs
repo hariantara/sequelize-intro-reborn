@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+  <%- include ./partial/title%>
+</head>
+
+<body>
+  <center>
+    <h1>Students Add Subject</h1>
+    <br><br>
+    <br><br>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+      <tr>
+        <td><%= studentData.first_name %></td>
+        <td><%= studentData.last_name %></td>
+        <td><%= studentData.email %></td>
+      </tr>
+    </table>
+    <br>
+    <form action="/students/enroll/<%= studentData.id%>" method="POST">
+    Subject:<br>
+    <select name = "subject">
+      <% subjectData.forEach(subject =>{ %>
+      <option value="<%= subject.id %>" selected><%= subject.subject_name %></option>
+      <% }) %>
+    </select><br><br>
+    <a href="/students/enroll/<%=studentData.id%>" onclick="return confirm('Are you sure you want add this Subject?');"><button type="Submit" name="">Add Subject</button></a>
+  </form>
+  </center>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "sequelize-intro-reborn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hariantara/sequelize-intro-reborn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hariantara/sequelize-intro-reborn/issues"
+  },
+  "homepage": "https://github.com/hariantara/sequelize-intro-reborn#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "nodemon": "^1.11.0",
+    "pg": "^6.4.1",
+    "sequelize": "^4.4.2"
+  }
+}
