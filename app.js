@@ -31,6 +31,6 @@ const logins = require('./routers/login')
 app.use('/login', logins)
 
 const signups = require('./routers/signup')
-app.use('/', signups)
+app.use('/signup', signups)
 
 app.listen(process.env.PORT || 3000);
