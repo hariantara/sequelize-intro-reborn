@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,6 @@
     "pg": "^6.4.1",
     "random-bytes": "^1.0.0",
     "sequelize": "^4.4.2",
-    "sequelize-cli":"lastest"
+    "sequelize-cli": "^2.8.0"
   }
 }
