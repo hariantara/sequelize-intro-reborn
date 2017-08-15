@@ -41,7 +41,7 @@
         </td>
         <td>
           <%if(data.Score == undefined){%>
-            <a href=""><button type="Submit" name="">Give Score</button></a>
+            <a href="/subjects/score/<%= data.Student.id %>/<%= data.Subject.id %>"><button type="Submit" name="">Give Score</button></a>
           <%}else{%>
             <%= data.Score %>
           <%}%>

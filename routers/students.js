@@ -4,6 +4,16 @@ const app = express()
 const router = express.Router()
 const db = require('../models')
 
+var session = require('express-session');
+
+router.use((req,res, next)=>{
+  if(req.session.user.role == 'teacher'){
+    next();
+  }else{
+    res.send('You have to login as Headmaster');
+  }
+})
+
 router.get('/', (req, res)=>{
   db.Student.findAll({order:[["id"]]})
   .then(data =>{
@@ -38,7 +48,7 @@ router.get('/enroll/:id', (req, res)=>{
   .then((data)=>{
     db.Subject.findAll()
     .then((data2)=>{
-      res.render('students-add-subject', {studentData:data, subjectData:data2})
+      res.render('students-add-subject', {studentData:data, subjectData:data2, err:null})
     })
   })
 })
@@ -52,6 +62,18 @@ router.post('/enroll/:id', (req, res)=>{
   })
   .then(()=>{
     res.redirect('/students')
+  })
+  .catch(err=>{
+    // console.log(err.errors[0].message);
+    if(err.errors[0].message == "StudentId must be unique"){
+      db.Student.findById(req.params.id)
+      .then((data)=>{
+        db.Subject.findAll()
+        .then((data2)=>{
+          res.render("students-add-subject", {studentData:data, subjectData:data2,err: "Subject already enrolled"})
+        })
+      })
+    }
   })
 })
 
@@ -81,7 +103,10 @@ router.post('/edit/:id', (req, res)=>{
 router.get('/delete/:id', (req, res)=>{
   db.Student.destroy({where:{id:`${req.params.id}`}})
   .then(()=>{
-    res.redirect('/students')
+    db.StudentSubject.destroy({where:{StudentId: `${req.params.id}`}})
+    .then(()=>{
+      res.redirect('/students')
+    })
   })
 })
 

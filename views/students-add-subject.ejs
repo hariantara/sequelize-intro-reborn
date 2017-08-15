@@ -48,6 +48,10 @@
       <option value="<%= subject.id %>" selected><%= subject.subject_name %></option>
       <% }) %>
     </select><br><br>
+    <%if(err){%>
+      <p style="color:red"><%= err %></p>  
+      <%}%>
+
     <a href="/students/enroll/<%=studentData.id%>" onclick="return confirm('Are you sure you want add this Subject?');"><button type="Submit" name="">Add Subject</button></a>
   </form>
   </center>

@@ -4,6 +4,17 @@ const app = express()
 const router = express.Router()
 const db = require('../models')
 
+var session = require('express-session');
+
+router.use((req,res, next)=>{
+  if(req.session.user.role == 'headmaster'){
+    next();
+  }else{
+    res.send('You have to login as Headmaster');
+  }
+})
+
+
 router.get('/', (req, res)=>{
   db.Teacher.findAll({
     include:[db.Subject],

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 20%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
+</head>
+<body>
+<center>
+<h2>Striped Table</h2>
+
+<table>
+  <%=JSON.stringify(studentData)%>
+    <th>Student</th>
+    <td><%= studentData[0].first_name+" "+studentData[0].last_name %></td>
+  </tr>
+  <tr>
+    <th>Subject</th>
+    <td><%= subjectData[0].subject_name%></td>
+  </tr>
+</table>
+<br>
+<form class="" action="/subjects/score/<%= studentData[0].id %>/<%= subjectData[0].id%>" method="post">
+  SCORE:<br>
+  <input type="text" name="score" value="">
+  <button type="submit" name="button">Submit</button>
+</form>
+</center>
+</body>
+</html>
